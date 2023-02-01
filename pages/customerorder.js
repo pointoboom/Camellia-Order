@@ -37,15 +37,15 @@ function Customerorder() {
       <Flex direction="column" my="50px" alignItems="center">
         <Flex
           direction={{ md: "row", base: "column" }}
-          justifyContent="center"
+          justifyContent="space-around"
           mb="50px"
         >
-          <Flex direction="column" mr="150px">
+          <Flex direction="column" justifyContent="center" alignItems="center">
             <Flex justifyContent="center">
               <Text>Reciever Information</Text>
             </Flex>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   ชื่อผู้รับ
                 </FormLabel>
@@ -53,7 +53,7 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="number">
                   เบอร์โทรศัพท์
                 </FormLabel>
@@ -61,7 +61,7 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   สถานที่ส่ง
                 </FormLabel>
@@ -69,13 +69,13 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
                 <Input width="300px" />
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px">ข้อความที่จะส่ง</FormLabel>
                 <Textarea width="300px" />
               </Flex>
@@ -86,7 +86,7 @@ function Customerorder() {
               <Text>Flower Detail **รายละเอียดที่ต้องการเน้นเป็นพิเศษ**</Text>
             </Flex>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   ดอกไม้
                 </FormLabel>
@@ -94,7 +94,7 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   สีริบบิ้น
                 </FormLabel>
@@ -102,7 +102,7 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   สีกระดาษห่อ
                 </FormLabel>
@@ -110,7 +110,7 @@ function Customerorder() {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex mt="20px">
+              <Flex mt="20px" pl="30px">
                 <FormLabel width="100px" type="text">
                   โทนสี
                 </FormLabel>
