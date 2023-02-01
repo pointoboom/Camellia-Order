@@ -36,7 +36,7 @@ function Customerorder() {
       </Flex>
       <Flex direction="column" my="50px" alignItems="center">
         <Flex
-          direction={{ lg: "row", md: "column" }}
+          direction={{ md: "row", base: "column" }}
           justifyContent="center"
           mb="50px"
         >
