@@ -5,11 +5,10 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
-// 1. Import the utilities
+import { DatePicker } from "antd";
 import { extendTheme } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect } from "react";
-// 2. Update the breakpoints as key-value pairs
+import { useState } from "react";
 const breakpoints = {
   sm: "320px",
   md: "768px",
@@ -18,15 +17,40 @@ const breakpoints = {
   "2xl": "1536px",
 };
 
-// 3. Extend the theme
 const theme = extendTheme({ breakpoints });
 
 function Customerorder() {
-  async function getData() {
-    const res = await axios.get("/api/order");
-    console.log(res.data.data);
+  const [reciever, setReciever] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [place, setPlace] = useState("");
+  const [deliveryDate, setDeliverydate] = useState("");
+  const [message, setMessage] = useState("");
+  const [flower, setFlower] = useState("");
+  const [ribbon, setRibbon] = useState("");
+  const [wrapper, setWrapper] = useState("");
+  const [tone, setTone] = useState("");
+  async function handlesubmit(event) {
+    event.preventDefault();
+    const data = {
+      reciever,
+      telephone,
+      place,
+      deliveryDate,
+      message,
+      flower,
+      ribbon,
+      wrapper,
+      tone,
+    };
+    const result = await axios.post("/api/order", data);
+    console.log(result.data.message);
+    if (result.data.message === "success") {
+      alert("Thank you");
+    }
   }
-  getData();
+  const onChangeDate = (value) => {
+    setDeliverydate(value.$d);
+  };
   return (
     <>
       <Flex direction="column" alignItems="center" mt="30px">
@@ -34,95 +58,157 @@ function Customerorder() {
           Order Confirmation
         </Text>
       </Flex>
-      <Flex direction="column" my="50px" alignItems="center">
-        <Flex
-          direction={{ md: "row", base: "column" }}
-          justifyContent="space-around"
-          mb="50px"
-        >
-          <Flex direction="column" justifyContent="center" alignItems="center">
-            <Flex justifyContent="center">
-              <Text>Reciever Information</Text>
+      <form>
+        <Flex direction="column" my="50px" alignItems="center">
+          <Flex
+            direction={{ md: "row", base: "column" }}
+            justifyContent="space-around"
+            mb="50px"
+          >
+            <Flex
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Flex justifyContent="center">
+                <Text>Reciever Information</Text>
+              </Flex>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    ชื่อผู้รับ
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setReciever(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="number">
+                    เบอร์โทรศัพท์
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setTelephone(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    สถานที่ส่ง
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setPlace(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
+                  <DatePicker
+                    showTime
+                    format="dd,DD MMM YYYY HH:mm"
+                    style={{
+                      width: "300px",
+                      fontFamily: "Inter",
+                      fontSize: "30px",
+                      paddingLeft: "15px",
+                    }}
+                    onChange={onChangeDate}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px">ข้อความที่จะส่ง</FormLabel>
+                  <Textarea
+                    width="300px"
+                    onChange={(event) => {
+                      setMessage(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
             </Flex>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  ชื่อผู้รับ
-                </FormLabel>
-                <Input width="300px" />
+            <Flex direction="column">
+              <Flex justifyContent="center">
+                <Text>Flower Detail **รายละเอียดที่ต้องการเน้นเป็นพิเศษ**</Text>
               </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="number">
-                  เบอร์โทรศัพท์
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  สถานที่ส่ง
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px">ข้อความที่จะส่ง</FormLabel>
-                <Textarea width="300px" />
-              </Flex>
-            </FormControl>
-          </Flex>
-          <Flex direction="column">
-            <Flex justifyContent="center">
-              <Text>Flower Detail **รายละเอียดที่ต้องการเน้นเป็นพิเศษ**</Text>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    ดอกไม้
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setFlower(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    สีริบบิ้น
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setRibbon(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    สีกระดาษห่อ
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setWrapper(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
+              <FormControl>
+                <Flex mt="20px" pl="30px">
+                  <FormLabel width="100px" type="text">
+                    โทนสี
+                  </FormLabel>
+                  <Input
+                    width="300px"
+                    onChange={(event) => {
+                      setTone(event.target.value);
+                    }}
+                  />
+                </Flex>
+              </FormControl>
             </Flex>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  ดอกไม้
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  สีริบบิ้น
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  สีกระดาษห่อ
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
-            <FormControl>
-              <Flex mt="20px" pl="30px">
-                <FormLabel width="100px" type="text">
-                  โทนสี
-                </FormLabel>
-                <Input width="300px" />
-              </Flex>
-            </FormControl>
           </Flex>
+          <Button
+            width="100px"
+            // type="submit"
+            onClick={(e) => {
+              handlesubmit(e);
+            }}
+          >
+            Submit
+          </Button>
         </Flex>
-        <Button width="100px" type="submit">
-          Submit
-        </Button>
-      </Flex>
+      </form>
     </>
   );
 }
