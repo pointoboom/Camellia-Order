@@ -66,7 +66,7 @@ function Dashboard() {
             </Flex>
 
             <Flex align="center" justify="center" display="flex">
-              <TableContainer w="1080px" mt="50px">
+              <TableContainer w="full" mt="50px">
                 <Table variant="simple" size="md" align="center">
                   <Thead bg="#CCCCCC" color="gray.800" mt="50px">
                     <Tr>
