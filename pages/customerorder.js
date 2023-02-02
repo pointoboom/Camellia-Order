@@ -9,6 +9,7 @@ import { DatePicker } from "antd";
 import { extendTheme } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/router";
 const breakpoints = {
   sm: "320px",
   md: "768px",
@@ -29,6 +30,7 @@ function Customerorder() {
   const [ribbon, setRibbon] = useState("");
   const [wrapper, setWrapper] = useState("");
   const [tone, setTone] = useState("");
+  const router = useRouter();
   async function handlesubmit(event) {
     event.preventDefault();
     const data = {
@@ -43,9 +45,8 @@ function Customerorder() {
       tone,
     };
     const result = await axios.post("/api/order", data);
-    console.log(result.data.message);
     if (result.data.message === "success") {
-      alert("Thank you");
+      router.push("/ordercomplete");
     }
   }
   const onChangeDate = (value) => {
@@ -58,7 +59,7 @@ function Customerorder() {
           Order Confirmation
         </Text>
       </Flex>
-      <form>
+      <form onSubmit={handlesubmit}>
         <Flex direction="column" my="50px" alignItems="center">
           <Flex
             direction={{ md: "row", base: "column" }}
@@ -198,13 +199,7 @@ function Customerorder() {
               </FormControl>
             </Flex>
           </Flex>
-          <Button
-            width="100px"
-            // type="submit"
-            onClick={(e) => {
-              handlesubmit(e);
-            }}
-          >
+          <Button width="100px" type="submit">
             Submit
           </Button>
         </Flex>
