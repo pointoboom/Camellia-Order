@@ -74,7 +74,7 @@ function Customerorder() {
               <Flex justifyContent="center">
                 <Text>Reciever Information</Text>
               </Flex>
-              <FormControl>
+              <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px" type="text">
                     ชื่อผู้รับ
@@ -87,7 +87,7 @@ function Customerorder() {
                   />
                 </Flex>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px" type="number">
                     เบอร์โทรศัพท์
@@ -100,7 +100,7 @@ function Customerorder() {
                   />
                 </Flex>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px" type="text">
                     สถานที่ส่ง
@@ -113,7 +113,7 @@ function Customerorder() {
                   />
                 </Flex>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
                   <DatePicker
