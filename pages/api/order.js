@@ -17,13 +17,17 @@ export default async function handler(req, res) {
         ribbon: req.body.ribbon,
         wrapping: req.body.wrapper,
         colour: req.body.tone,
+        status: "pending",
       });
       return res.json({
         message: "success",
       });
     } catch (error) {}
   } else if (req.method === "GET") {
-    const { data, error } = await supabase.from("orders").select();
+    const { data, error } = await supabase
+      .from("orders")
+      .select()
+      .order("delivery", { ascending: true });
 
     return res.json({
       data: data,
