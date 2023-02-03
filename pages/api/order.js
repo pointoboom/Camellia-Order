@@ -22,15 +22,25 @@ export default async function handler(req, res) {
       return res.json({
         message: "success",
       });
-    } catch (error) {}
+    } catch (error) {
+      return res.json({
+        message: "fail",
+      });
+    }
   } else if (req.method === "GET") {
-    const { data, error } = await supabase
-      .from("orders")
-      .select()
-      .order("delivery", { ascending: true });
+    try {
+      const { data, error } = await supabase
+        .from("orders")
+        .select()
+        .order("delivery", { ascending: true });
 
-    return res.json({
-      data: data,
-    });
+      return res.json({
+        data: data,
+      });
+    } catch (error) {
+      return res.json({
+        message: "fail",
+      });
+    }
   }
 }
