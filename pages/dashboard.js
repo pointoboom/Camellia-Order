@@ -11,6 +11,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Button,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -54,6 +55,14 @@ function Dashboard() {
                 </Text>
               </Flex>
               <Flex>
+                <Button
+                  mr="20px"
+                  onClick={() => {
+                    router.push("/customerorder");
+                  }}
+                >
+                  New Order
+                </Button>
                 <InputGroup>
                   <Input
                     mr="10"
@@ -115,53 +124,10 @@ function Dashboard() {
                               {data.status}
                             </Text>
                           </Td>
-
-                          {/* <Td>
-                            <Select
-                              bordered={false}
-                              showArrow={false}
-                            //   defaultValue={data.status_name}
-                              style={{
-                                width: 180,
-                              }}
-                            //   options={options}
-                            //   onChange={(e) => {
-                            //     handleChange(e, data.room_no);
-                            //   }}
-                            />
-                          </Td> */}
                         </Tr>
                       </Tbody>
                     );
                   })}
-                  {/* {roomManagement == null
-                    ? null
-                    : roomManagement.map((data) => {
-                        return (
-                          <Tbody bg="white" key={data.room_no}>
-                            <Tr>
-                              <Td>{data.room_no}</Td>
-                              <Td>{data.type_name}</Td>
-                              <Td>{data.bed_type}</Td>
-
-                              <Td>
-                                <Select
-                                  bordered={false}
-                                  showArrow={false}
-                                  defaultValue={data.status_name}
-                                  style={{
-                                    width: 180,
-                                  }}
-                                  options={options}
-                                  onChange={(e) => {
-                                    handleChange(e, data.room_no);
-                                  }}
-                                />
-                              </Td>
-                            </Tr>
-                          </Tbody>
-                        );
-                      })} */}
 
                   <Tbody bg="white"></Tbody>
                 </Table>

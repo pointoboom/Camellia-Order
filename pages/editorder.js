@@ -61,13 +61,20 @@ function Editorder() {
       });
     }
   }
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const id = router.query.keyword;
+    const result = await axios.delete(`/api/${id}`);
+    if (result.data.message === "success") {
+      router.push("/dashboard");
+    }
+  };
   const onChangeDate = (value) => {
     setDeliverydate(value.$d);
   };
   const getData = async () => {
     const id = router.query.keyword;
     const result = await axios.get(`/api/${id}`);
-    console.log(result.data.data);
 
     setReciever(result.data.data[0].reciever);
     setTelephone(result.data.data[0].telephone);
@@ -302,159 +309,22 @@ function Editorder() {
                     </FormControl>
                   </Flex>
                 </Flex>
-                <Button width="100px" type="submit">
+                <Button width="100px" type="submit" mb="20px">
                   Submit
+                </Button>
+                <Button
+                  width="100px"
+                  onClick={(event) => {
+                    handleDelete(event);
+                  }}
+                >
+                  Delete
                 </Button>
               </Flex>
             </form>
           </>
         );
       })}
-      {/* <form onSubmit={handlesubmit}>
-        <Flex direction="column" my="50px" alignItems="center">
-          <Flex
-            direction={{ md: "row", base: "column" }}
-            justifyContent="space-around"
-            mb="50px"
-          >
-            <Flex
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Flex justifyContent="center">
-                <Text>Reciever Information</Text>
-              </Flex>
-              <FormControl isRequired>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    ชื่อผู้รับ
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setReciever(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl isRequired>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="number">
-                    เบอร์โทรศัพท์
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setTelephone(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl isRequired>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    สถานที่ส่ง
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setPlace(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl isRequired>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
-                  <DatePicker
-                    showTime
-                    format="dd,DD MMM YYYY HH:mm"
-                    style={{
-                      width: "300px",
-                      fontFamily: "Inter",
-                      fontSize: "30px",
-                      paddingLeft: "15px",
-                    }}
-                    onChange={onChangeDate}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px">ข้อความที่จะส่ง</FormLabel>
-                  <Textarea
-                    width="300px"
-                    onChange={(event) => {
-                      setMessage(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-            </Flex>
-            <Flex direction="column">
-              <Flex justifyContent="center">
-                <Text>Flower Detail **รายละเอียดที่ต้องการเน้นเป็นพิเศษ**</Text>
-              </Flex>
-              <FormControl>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    ดอกไม้
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setFlower(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    สีริบบิ้น
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setRibbon(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    สีกระดาษห่อ
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setWrapper(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-              <FormControl>
-                <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px" type="text">
-                    โทนสี
-                  </FormLabel>
-                  <Input
-                    width="300px"
-                    onChange={(event) => {
-                      setTone(event.target.value);
-                    }}
-                  />
-                </Flex>
-              </FormControl>
-            </Flex>
-          </Flex>
-          <Button width="100px" type="submit">
-            Submit
-          </Button>
-        </Flex>
-      </form> */}
     </>
   );
 }

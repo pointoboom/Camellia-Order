@@ -19,9 +19,15 @@ export default async function handler(req, res) {
         colour: req.body.tone,
         status: "pending",
       });
-      return res.json({
-        message: "success",
-      });
+      if (!error) {
+        return res.json({
+          message: "success",
+        });
+      } else {
+        return res.json({
+          message: "fail",
+        });
+      }
     } catch (error) {
       return res.json({
         message: "fail",
@@ -33,10 +39,15 @@ export default async function handler(req, res) {
         .from("orders")
         .select()
         .order("delivery", { ascending: true });
-
-      return res.json({
-        data: data,
-      });
+      if (!error) {
+        return res.json({
+          data: data,
+        });
+      } else {
+        return res.json({
+          message: "fail",
+        });
+      }
     } catch (error) {
       return res.json({
         message: "fail",

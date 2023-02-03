@@ -9,10 +9,15 @@ export default async function getOrderByID(req, res) {
       .from("orders")
       .select()
       .eq("order_id", req.query.id);
-
-    return res.json({
-      data: data,
-    });
+    if (!error) {
+      return res.json({
+        data: data,
+      });
+    } else {
+      return res.json({
+        message: "fail",
+      });
+    }
   } else if (req.method === "POST") {
     const { error } = await supabase
       .from("orders")
@@ -32,8 +37,28 @@ export default async function getOrderByID(req, res) {
         detail: req.body.detail,
       })
       .eq("order_id", req.query.id);
-    return res.json({
-      message: "success",
-    });
+    if (!error) {
+      return res.json({
+        message: "success",
+      });
+    } else {
+      return res.json({
+        message: "fail",
+      });
+    }
+  } else if (req.method === "DELETE") {
+    const { error } = await supabase
+      .from("orders")
+      .delete()
+      .eq("order_id", req.query.id);
+    if (!error) {
+      return res.json({
+        message: "success",
+      });
+    } else {
+      return res.json({
+        message: "fail",
+      });
+    }
   }
 }

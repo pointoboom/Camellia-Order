@@ -47,6 +47,8 @@ function Customerorder() {
     const result = await axios.post("/api/order", data);
     if (result.data.message === "success") {
       router.push("/ordercomplete");
+    } else {
+      alert("กรุณาใส่ข้อมูลให้ครบถ้วน(ช่องเวลา)");
     }
   }
   const onChangeDate = (value) => {
