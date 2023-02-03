@@ -16,11 +16,13 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import axios from "axios";
+
 function Dashboard() {
   const [order, setOrder] = useState([]);
+  const router = useRouter();
   const getData = async () => {
     const result = await axios.get("/api/order");
-    console.log(result.data.data);
+
     const data = result.data.data.map((data) => {
       const delivery_date = moment(data.delivery).format("DD MMM YYYY HH:mm");
 
@@ -84,7 +86,16 @@ function Dashboard() {
                   </Thead>
                   {order.map((data) => {
                     return (
-                      <Tbody bg="white" key={data.room_no}>
+                      <Tbody
+                        bg="white"
+                        key={data.order_id}
+                        onClick={() => {
+                          router.push({
+                            pathname: "/editorder",
+                            query: { keyword: data.order_id },
+                          });
+                        }}
+                      >
                         <Tr>
                           <Td>{data.delivery_date}</Td>
                           <Td>{data.sender}</Td>
