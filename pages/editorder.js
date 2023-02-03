@@ -55,7 +55,10 @@ function Editorder() {
     const id = router.query.keyword;
     const result = await axios.post(`/api/${id}`, data);
     if (result.data.message === "success") {
-      router.push("/ordercomplete");
+      router.push({
+        pathname: "/ordersummary",
+        query: { keyword: id },
+      });
     }
   }
   const onChangeDate = (value) => {
