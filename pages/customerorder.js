@@ -52,6 +52,7 @@ function Customerorder() {
     }
   }
   const onChangeDate = (value) => {
+    console.log(value);
     setDeliverydate(value.$d);
   };
   return (
@@ -127,7 +128,7 @@ function Customerorder() {
                       fontSize: "30px",
                       paddingLeft: "15px",
                     }}
-                    onChange={onChangeDate}
+                    onOk={onChangeDate}
                   />
                 </Flex>
               </FormControl>

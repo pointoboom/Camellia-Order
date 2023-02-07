@@ -188,7 +188,7 @@ function Editorder() {
                             paddingLeft: "15px",
                           }}
                           defaultValue={moment(deliveryDate)}
-                          onChange={onChangeDate}
+                          onOk={onChangeDate}
                         />
                       </Flex>
                     </FormControl>
