@@ -166,7 +166,7 @@ function Editorder() {
                         <FormLabel width="100px" type="text">
                           สถานที่ส่ง
                         </FormLabel>
-                        <Input
+                        <Textarea
                           width="300px"
                           value={place}
                           onChange={(event) => {
@@ -175,7 +175,7 @@ function Editorder() {
                         />
                       </Flex>
                     </FormControl>
-                    <FormControl isRequired>
+                    <FormControl>
                       <Flex mt="20px" pl="30px">
                         <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
                         <DatePicker

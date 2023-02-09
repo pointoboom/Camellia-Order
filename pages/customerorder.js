@@ -48,7 +48,7 @@ function Customerorder() {
     if (result.data.message === "success") {
       router.push("/ordercomplete");
     } else {
-      alert("กรุณาใส่ข้อมูลให้ครบถ้วน(ช่องเวลา)");
+      alert("กรุณาใส่ข้อมูลให้ครบถ้วน");
     }
   }
   const onChangeDate = (value) => {
@@ -108,7 +108,7 @@ function Customerorder() {
                   <FormLabel width="100px" type="text">
                     สถานที่ส่ง
                   </FormLabel>
-                  <Input
+                  <Textarea
                     width="300px"
                     onChange={(event) => {
                       setPlace(event.target.value);
@@ -116,7 +116,7 @@ function Customerorder() {
                   />
                 </Flex>
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
                   <DatePicker
