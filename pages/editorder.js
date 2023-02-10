@@ -1,4 +1,4 @@
-import { Flex, Text, Input, Button, Textarea } from "@chakra-ui/react";
+import { Flex, Text, Input, Button, Textarea, Select } from "@chakra-ui/react";
 import {
   FormControl,
   FormLabel,
@@ -34,9 +34,11 @@ function Editorder() {
   const [delivery_fee, setDeliveryFee] = useState("");
   const [sender, setSender] = useState("");
   const [detail, setDetail] = useState("");
+  const [status, setStatus] = useState("pending");
   const router = useRouter();
   async function handlesubmit(event) {
     event.preventDefault();
+    console.log(status);
     const data = {
       sender,
       reciever,
@@ -51,10 +53,13 @@ function Editorder() {
       price,
       delivery_fee,
       detail,
+      status,
     };
     const id = router.query.keyword;
     const result = await axios.post(`/api/${id}`, data);
-    if (result.data.message === "success") {
+    if (status === "complete") {
+      router.push("/dashboard");
+    } else if (result.data.message === "success") {
       router.push({
         pathname: "/ordersummary",
         query: { keyword: id },
@@ -305,6 +310,20 @@ function Editorder() {
                             setDetail(event.target.value);
                           }}
                         />
+                      </Flex>
+                    </FormControl>
+                    <FormControl>
+                      <Flex mt="20px" pl="30px">
+                        <FormLabel width="100px">สถานะ</FormLabel>
+                        <Select
+                          placeholder="Select option"
+                          onChange={(event) => {
+                            setStatus(event.target.value);
+                          }}
+                        >
+                          <option value="pending">pending</option>
+                          <option value="complete">complete</option>
+                        </Select>
                       </Flex>
                     </FormControl>
                   </Flex>

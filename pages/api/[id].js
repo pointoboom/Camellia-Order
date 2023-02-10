@@ -35,6 +35,7 @@ export default async function getOrderByID(req, res) {
         delivery_fee: req.body.delivery_fee,
         sender: req.body.sender,
         detail: req.body.detail,
+        status: req.body.status,
       })
       .eq("order_id", req.query.id);
     if (!error) {

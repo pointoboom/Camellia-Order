@@ -82,6 +82,7 @@ function Dashboard() {
                   <Thead bg="#CCCCCC" color="gray.800" mt="50px">
                     <Tr>
                       <Th>วันเวลาที่ส่ง</Th>
+                      <Th>สถานะ</Th>
                       <Th>ชื่อผู้ส่ง</Th>
                       <Th>ชื่อผู้รับ</Th>
                       <Th>รายละเอียดอกไม้</Th>
@@ -90,7 +91,6 @@ function Dashboard() {
                       <Th>ข้อความ</Th>
                       <Th>ราคา</Th>
                       <Th>ค่าส่ง</Th>
-                      <Th>สถานะ</Th>
                     </Tr>
                   </Thead>
                   {order.map((data) => {
@@ -107,6 +107,19 @@ function Dashboard() {
                       >
                         <Tr>
                           <Td>{data.delivery_date}</Td>
+                          <Td>
+                            <Text
+                              backgroundColor={
+                                data.status === "pending"
+                                  ? "red.100"
+                                  : "green.100"
+                              }
+                              borderRadius="5px"
+                              padding="5px"
+                            >
+                              {data.status}
+                            </Text>
+                          </Td>
                           <Td>{data.sender}</Td>
                           <Td>{data.reciever}</Td>
                           <Td>{data.detail}</Td>
@@ -115,15 +128,6 @@ function Dashboard() {
                           <Td>{data.message}</Td>
                           <Td>{data.price}</Td>
                           <Td>{data.delivery_fee}</Td>
-                          <Td>
-                            <Text
-                              backgroundColor="green.100"
-                              borderRadius="5px"
-                              padding="5px"
-                            >
-                              {data.status}
-                            </Text>
-                          </Td>
                         </Tr>
                       </Tbody>
                     );
