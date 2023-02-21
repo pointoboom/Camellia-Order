@@ -203,9 +203,9 @@ function Editorder() {
                           }}
                           showTimeSelect
                           timeFormat="HH:mm"
-                          timeIntervals={15}
+                          timeIntervals={30}
                           timeCaption="time"
-                          dateFormat="d MMMM  yyyy h:mm"
+                          dateFormat="d MMMM  yyyy HH:mm"
                         />
                       </Flex>
                     </FormControl>
