@@ -6,6 +6,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
+  Button,
+  Flex,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -20,20 +22,28 @@ function OrderComplete() {
         closeOnOverlayClick={false}
       >
         <ModalOverlay />
-        <ModalContent pt="50px" pl="50px">
-          <ModalBody display="flex" direction="row" alignItems="center">
-            <>
-              <Icon
-                w={12}
-                h={12}
-                as={AiOutlineCheckCircle}
-                color="green"
-                mr="40px"
-              />
-              <Text fontFamily={"Inter"} textColor="rgba(47, 62, 53, 1)">
-                Thank You
-              </Text>
-            </>
+        <ModalContent pt="50px">
+          <ModalBody display="flex" direction="row" justifyContent="center">
+            <Flex justifyContent="center" alignItems="center">
+              <Flex
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Flex justifyContent="center" alignItems="center">
+                  <Icon
+                    w={12}
+                    h={12}
+                    as={AiOutlineCheckCircle}
+                    color="green"
+                    mr="40px"
+                  />
+                  <Text fontFamily={"Inter"} textColor="rgba(47, 62, 53, 1)">
+                    Thank You
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
           </ModalBody>
 
           <ModalFooter>
