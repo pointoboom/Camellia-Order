@@ -24,13 +24,15 @@ function Dashboard() {
   const getData = async () => {
     const result = await axios.get("/api/order");
 
-    const data = result.data.data.map((data) => {
-      const delivery_date = moment(data.delivery).format("DD MMM YYYY HH:mm");
+    if (result.data.data) {
+      const data = result.data.data.map((data) => {
+        const delivery_date = moment(data.delivery).format("DD MMM YYYY HH:mm");
 
-      data = { ...data, delivery_date };
-      return data;
-    });
-    setOrder(data);
+        data = { ...data, delivery_date };
+        return data;
+      });
+      setOrder(data);
+    }
   };
   useEffect(() => {
     getData();

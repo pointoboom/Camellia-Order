@@ -5,11 +5,13 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
-import { DatePicker } from "antd";
+// import { DatePicker } from "antd";
 import { extendTheme } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const breakpoints = {
   sm: "320px",
   md: "768px",
@@ -80,7 +82,6 @@ function Editorder() {
   const getData = async () => {
     const id = router.query.keyword;
     const result = await axios.get(`/api/${id}`);
-
     setReciever(result.data.data[0].reciever);
     setTelephone(result.data.data[0].telephone);
     setPlace(result.data.data[0].place);
@@ -183,7 +184,7 @@ function Editorder() {
                     <FormControl>
                       <Flex mt="20px" pl="30px">
                         <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
-                        <DatePicker
+                        {/* <DatePicker
                           showTime
                           format="dd,DD MMM YYYY HH:mm"
                           style={{
@@ -194,6 +195,17 @@ function Editorder() {
                           }}
                           defaultValue={moment(deliveryDate)}
                           onOk={onChangeDate}
+                        /> */}
+                        <DatePicker
+                          selected={moment(deliveryDate)._d}
+                          onChange={(date) => {
+                            setDeliverydate(date);
+                          }}
+                          showTimeSelect
+                          timeFormat="HH:mm"
+                          timeIntervals={15}
+                          timeCaption="time"
+                          dateFormat="d MMMM  yyyy h:mm"
                         />
                       </Flex>
                     </FormControl>

@@ -34,12 +34,22 @@ export default async function handler(req, res) {
       });
     }
   } else if (req.method === "GET") {
+    let date = new Date();
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    let firstDate = `${date.getFullYear()}-0${date.getMonth() + 1}-01`;
+    const lastDate = `${date.getFullYear()}-0${
+      date.getMonth() + 1
+    }-${lastDayOfMonth.getDate()}`;
+
     try {
       const { data, error } = await supabase
         .from("orders")
         .select()
-        .order("delivery", { ascending: true });
-      if (!error) {
+        .gte("delivery", `[${firstDate} 00:00:01)`)
+        .lte("delivery", `[${lastDate} 23:59:59)`)
+        .order("delivery", { ascending: false });
+
+      if (!error || data === !null) {
         return res.json({
           data: data,
         });
