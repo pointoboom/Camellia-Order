@@ -5,11 +5,13 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
-import { DatePicker } from "antd";
+import "react-datepicker/dist/react-datepicker.css";
+// import { DatePicker } from "antd";
 import { extendTheme } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import DatePicker from "react-datepicker";
 const breakpoints = {
   sm: "320px",
   md: "768px",
@@ -24,12 +26,13 @@ function Customerorder() {
   const [reciever, setReciever] = useState("");
   const [telephone, setTelephone] = useState("");
   const [place, setPlace] = useState("");
-  const [deliveryDate, setDeliverydate] = useState("");
+  const [deliveryDate, setDeliverydate] = useState(new Date());
   const [message, setMessage] = useState("");
   const [flower, setFlower] = useState("");
   const [ribbon, setRibbon] = useState("");
   const [wrapper, setWrapper] = useState("");
   const [tone, setTone] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
   async function handlesubmit(event) {
     event.preventDefault();
@@ -115,10 +118,10 @@ function Customerorder() {
                   />
                 </Flex>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
                   <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
-                  <DatePicker
+                  {/* <DatePicker
                     showTime
                     format="dd,DD MMM YYYY HH:mm"
                     style={{
@@ -128,6 +131,18 @@ function Customerorder() {
                       paddingLeft: "15px",
                     }}
                     onOk={onChangeDate}
+                  /> */}
+                  <DatePicker
+                    selected={deliveryDate}
+                    onChange={(date) => {
+                      setDeliverydate(date);
+                      console.log(startDate);
+                    }}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    timeCaption="time"
+                    dateFormat="d MMMM  yyyy h:mm"
                   />
                 </Flex>
               </FormControl>
