@@ -120,7 +120,7 @@ function Customerorder() {
               </FormControl>
               <FormControl isRequired>
                 <Flex mt="20px" pl="30px">
-                  <FormLabel width="100px">วันที่-เวลาส่ง</FormLabel>
+                  <FormLabel width="200px">วันที่-เวลาส่ง</FormLabel>
                   {/* <DatePicker
                     showTime
                     format="dd,DD MMM YYYY HH:mm"
