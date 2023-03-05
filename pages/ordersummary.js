@@ -115,7 +115,7 @@ function OrderSummary() {
 
               <Image src="/QR_Bright.png" boxSize="150px" />
               <Text>น.ส. รัชเกล้า ปรีชาอนันต์</Text>
-              <Text>Promptpay:0873228279</Text>
+              <Text>Promptpay:0994797823</Text>
               <Text fontWeight="bold">***กรุณาตรวจสอบรายละเอียดก่อนโอน***</Text>
             </Flex>
           </ModalBody>
