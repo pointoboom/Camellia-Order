@@ -1,6 +1,6 @@
 // import { pool } from "../utils/db.js";
 import { createClient } from "@supabase/supabase-js";
-
+import moment from "moment";
 const supabaseUrl = "https://bippbkldwdozkbgkzlqo.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -35,11 +35,19 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "GET") {
     let date = new Date();
-    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    let firstDate = `${date.getFullYear()}-0${date.getMonth() + 1}-01`;
-    const lastDate = `${date.getFullYear()}-0${
-      date.getMonth() + 1
-    }-${lastDayOfMonth.getDate()}`;
+    let lastDayOfMonth;
+    let firstDate;
+    let lastDate;
+    if (req.query.startdate && req.query.enddate) {
+      firstDate = moment(req.query.startdate).format("YYYY-MM-DD");
+      lastDate = moment(req.query.enddate).format("YYYY-MM-DD");
+    } else {
+      lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      firstDate = `${date.getFullYear()}-0${date.getMonth() + 1}-01`;
+      lastDate = `${date.getFullYear()}-0${
+        date.getMonth() + 1
+      }-${lastDayOfMonth.getDate()}`;
+    }
 
     try {
       const { data, error } = await supabase

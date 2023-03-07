@@ -6,3 +6,8 @@
   padding: 0px;
   font-family: "Noto Sans Thai", sans-serif;
 }
+
+.react-datepicker-wrapper {
+  border-color: black;
+  border: 2px;
+}

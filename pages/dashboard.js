@@ -10,17 +10,36 @@ import {
   Tr,
   Th,
   Td,
+  Box,
   TableContainer,
   Button,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 import { useRouter } from "next/router";
 import moment from "moment";
 import axios from "axios";
 
 function Dashboard() {
   const [order, setOrder] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const router = useRouter();
+  const searchOrder = async () => {
+    const result = await axios.get(
+      `/api/order?startdate=${startDate}&enddate=${endDate}`
+    );
+    if (result.data.data) {
+      const data = result.data.data.map((data) => {
+        const delivery_date = moment(data.delivery).format("DD MMM YYYY HH:mm");
+
+        data = { ...data, delivery_date };
+        return data;
+      });
+      setOrder(data);
+    }
+  };
   const getData = async () => {
     const result = await axios.get("/api/order");
 
@@ -77,7 +96,40 @@ function Dashboard() {
                 </InputGroup>
               </Flex>
             </Flex>
-
+            <Flex ml="20px">
+              <Box mr="10px">
+                {" "}
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => {
+                    setStartDate(date);
+                  }}
+                  placeholderText="Start date"
+                  timeCaption="time"
+                  dateFormat="d MMMM  yyyy"
+                />
+              </Box>
+              <Box mr="10px">
+                {" "}
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => {
+                    setEndDate(date);
+                  }}
+                  placeholderText="End Date"
+                  timeCaption="time"
+                  dateFormat="d MMMM  yyyy"
+                />
+              </Box>
+              <Button
+                background="blue.300"
+                onClick={() => {
+                  searchOrder();
+                }}
+              >
+                Search
+              </Button>
+            </Flex>
             <Flex align="center" justify="center" display="flex">
               <TableContainer mt="50px">
                 <Table variant="simple" size="md" align="center">
